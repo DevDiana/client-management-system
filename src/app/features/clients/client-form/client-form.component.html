@@ -1,0 +1,65 @@
+<h2 mat-dialog-title>Cadastrar Cliente</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="nome" />
+      @if (form.get('nome')?.hasError('required') && form.get('nome')?.touched) {
+        <mat-error>Nome é obrigatório</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Telefone</mat-label>
+      <input
+        matInput
+        formControlName="telefone"
+        maxlength="11"
+        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+      />
+      @if (form.get('telefone')?.errors?.['pattern']) {
+        <mat-error>Digite apenas números (10 ou 11 dígitos)</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>CPF</mat-label>
+      <input
+        matInput
+        formControlName="cpf"
+        placeholder="Somente números (ex: 12345678901)"
+        maxlength="11"
+        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+      />
+      @if (form.get('cpf')?.errors?.['pattern']) {
+        <mat-error>O CPF deve conter exatamente 11 números</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Placa</mat-label>
+      <input matInput formControlName="placa" />
+      @if (form.get('placa')?.hasError('required') && form.get('placa')?.touched) {
+        <mat-error>Placa é obrigatória</mat-error>
+      }
+    </mat-form-field>
+
+    @if (errorMessage) {
+      <div class="error-message">
+        {{ errorMessage }}
+      </div>
+    }
+  </div>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="cancel()" [disabled]="isLoading">Cancelar</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">
+      @if (isLoading) {
+        <mat-spinner diameter="20"></mat-spinner>
+      } @else {
+        Salvar
+      }
+    </button>
+  </mat-dialog-actions>
+</form>

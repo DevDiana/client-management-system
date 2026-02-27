@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: client-control-app
+    ports:
+      - "4200:4200"
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./db.json:/app/db.json
+    networks:
+      - client-network
+    restart: unless-stopped
+
+networks:
+  client-network:
+    driver: bridge

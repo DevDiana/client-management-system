@@ -1,0 +1,67 @@
+// Variáveis para manter consistência (Clean Code)
+$primary-color: #d81b60; // Rosa do Material que aparece no seu print
+$error-color: #b00020;
+$bg-light: #fff7f8;
+$border-radius: 12px;
+
+:host {
+  display: block;
+  padding: 8px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+h2[mat-dialog-title] {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #333;
+  margin-bottom: 8px;
+  padding-bottom: 0;
+}
+
+div[mat-dialog-content] {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px 0;
+  min-width: 400px;
+
+  // Estilizando os campos do Material
+  mat-form-field {
+    width: 100%;
+
+    // Ajuste para deixar o layout mais "arejado"
+    .mat-mdc-form-field-subscript-wrapper {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+.error-message {
+  color: $error-color;
+  background-color: lighten($error-color, 60%);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid lighten($error-color, 50%);
+  margin-top: 8px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+mat-dialog-actions {
+  padding: 16px 0 8px 0 !important;
+  gap: 12px;
+
+  button {
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    min-width: 100px;
+    border-radius: 8px;
+    height: 40px;
+  }
+}
